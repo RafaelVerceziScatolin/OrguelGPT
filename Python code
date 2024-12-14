@@ -1,1 +1,20 @@
-#Python code
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Define the webhook endpoint
+@app.route('/calculate', methods=['POST'])
+def calculate_expression():
+    # Get the JSON data from the request
+    data = request.json
+    X = data.get('X', 0)  # Default to 0 if X is not provided
+    
+    # Perform the calculation
+    result = (X + 2) * 3
+    
+    # Return the result as a JSON response
+    return jsonify({"result": result})
+
+if __name__ == '__main__':
+    # Run the Flask app on port 5000
+    app.run(port=5000)
